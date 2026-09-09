@@ -2,7 +2,7 @@ import mysql, { QueryValues, RowDataPacket } from "mysql2/promise"
 import env from "dotenv"
 env.config()
 
-interface bookData extends RowDataPacket {
+export interface bookData extends RowDataPacket {
   book_id : Buffer,
   book_name : string,
   create_at : string
@@ -19,8 +19,8 @@ const db = mysql.createPool({
 const checkConnection = async () => {
   try {  
     const [rows] = await db.query<bookData[]>('SELECT * FROM book')
-    console.log(rows)
-    console.log(rows[0].book_id.toString('hex'))
+    // console.log(rows)
+    // console.log(rows[0].book_id.toString('hex'))
     //This will run just when start
     return rows
   } catch (err){
@@ -30,4 +30,4 @@ const checkConnection = async () => {
 
 checkConnection()
 
-export const query = (text: string, params?:any[]) => db.query(text,params)
+export const query = <T extends RowDataPacket[]>(text: string, params?:any[]) => db.query<T>(text,params)
