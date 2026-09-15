@@ -3,7 +3,9 @@ import * as clientController from "../controllers/clientController"
 
 const router = express.Router()
 
-router.get(`/books`, clientController.getClients)
+router.get(`/books`, clientController.getBooks)
+
+router.post(`/books`, clientController.createBook)
 
 
 export default router;

@@ -1,18 +1,45 @@
-import { bookData, query } from "../db";
+import { BOOK, query } from "../db/db";
 
-export interface convertedBookData {
-  book_id : string,
-  book_name : string,
-  create_at : string
+
+// export interface BOOK extends RowDataPacket{
+//   BookID : number,
+//   BookName : string,
+//   QuantityInStock : number,
+//   Barcode : string | null,
+//   Price : string,
+//   Description : string | null,
+//   PublishDate : string | null
+//   Size : string,
+//   PublisherID : string | null  
+// }
+
+
+
+export const getBooks = async (): Promise<BOOK[]> =>{
+  const [rows] = await query<BOOK[]>(`SELECT * FROM BOOK`)
+  return rows
 }
 
-export const getBooks = async (): Promise<convertedBookData[]> =>{
-  const [rows] = await query<bookData[]>(`SELECT * FROM book`)
-  const data = rows.map((row)=> {
-    return {...row,
-            book_id: row.book_id.toString('hex')}
-  })
-  
-  console.log("From client service: ", data)
-  return data
+
+// -- INSERT INTO BOOK (BookName, QuantityInStock, Price, Size)
+// -- VALUES ("The Stranger", 10, 30.99 , 999)
+
+export const createBook = async (bookData : BOOK) => {
+  const {BookName, QuantityInStock, Barcode, Price, Description, PublishDate, Size, PublisherID} =  bookData
+  const values = [
+    BookName,
+    QuantityInStock,
+    Barcode,
+    Price,
+    Description,
+    PublishDate,
+    Size,
+    PublisherID
+  ]
+  const [row] = await query(
+    `INSERT INTO BOOK (BookName, QuantityInStock, Barcode, Price, Description, PublishDate, Size, PublisherID)
+    VALUES (?)`,[values]
+  )
+
+  return row
 }
