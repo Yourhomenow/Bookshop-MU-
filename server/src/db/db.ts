@@ -1,4 +1,4 @@
-import mysql, { RowDataPacket } from "mysql2/promise"
+import mysql, { ResultSetHeader, RowDataPacket } from "mysql2/promise"
 import env from "dotenv"
 env.config()
 
@@ -35,4 +35,4 @@ const checkConnection = async () => {
 
 checkConnection()
 
-export const query = <T extends RowDataPacket[]>(text: string, params?:any[]) => db.query<T>(text,params)
+export const query = <T extends RowDataPacket[] | ResultSetHeader>(text: string, params?:any[]) => db.query<T>(text,params)

@@ -7,5 +7,7 @@ router.get(`/books`, clientController.getBooks)
 
 router.post(`/books`, clientController.createBook)
 
+router.delete(`/books/:id`, clientController.deleteBook)
+
 
 export default router;

@@ -21,3 +21,19 @@ export const createBook = async (req: Request, res: Response) => {
     res.status(500).json({message: "Internal Server Error"})
   }
 }
+
+export const deleteBook = async (req: Request, res: Response) =>{
+  try{
+    const bookId = req.params.id as string
+    const deletedBook = await clientService.deleteBook(bookId)
+
+    if(!deletedBook){
+      return res.status(404).json({message: "Book not found"})
+    }
+
+    res.status(200).send()
+  }catch(err){
+    console.error(`Error Deleting client:`,err)
+    res.status(500).json({message: "Internal server error"})
+  }
+}
