@@ -22,6 +22,23 @@ export const createBook = async (req: Request, res: Response) => {
   }
 }
 
+export const updateBook = async (req: Request, res: Response) => {
+  try{
+    const bookData = req.body;
+    const bookId = req.params.id as string
+
+    const updatedBook = await clientService.updateBook(bookData,bookId)
+    if(!updatedBook){
+      return res.status(404).json({message: "Book not found"})
+    }
+
+    res.status(200).send()
+  }catch(err){
+    console.log(`Error Updating book:`,err)
+    res.status(500).json({message: "Internal server error"})
+  }
+}
+
 export const deleteBook = async (req: Request, res: Response) =>{
   try{
     const bookId = req.params.id as string
@@ -33,7 +50,7 @@ export const deleteBook = async (req: Request, res: Response) =>{
 
     res.status(200).send()
   }catch(err){
-    console.error(`Error Deleting client:`,err)
+    console.error(`Error Deleting book:`,err)
     res.status(500).json({message: "Internal server error"})
   }
 }

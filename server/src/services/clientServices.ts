@@ -41,29 +41,32 @@ export const createBook = async (bookData : BOOK) => {
   return row
 }
 
-// export const updateBook = async (bookData : BOOK) => {
-//   const {BookName, QuantityInStock, Barcode, Price, Description, PublishDate, Size, PublisherID} =  bookData
-//   const values = [
-//     BookName,
-//     QuantityInStock,
-//     Barcode,
-//     Price,
-//     Description,
-//     PublishDate,
-//     Size,
-//     PublisherID
-//   ]
-//   const [row] = await query(
-//     `INSERT INTO BOOK (BookName, QuantityInStock, Barcode, Price, Description, PublishDate, Size, PublisherID)
-//     VALUES (?)`,[values]
-//   )
-//   return row
-// }
+export const updateBook = async (bookData : BOOK, bookId : string) => {
+  const {BookName, QuantityInStock, Barcode, Price, Description, PublishDate, Size, PublisherID} =  bookData
+  const values = [
+    BookName,
+    QuantityInStock,
+    Barcode,
+    Price,
+    Description,
+    PublishDate,
+    Size,
+    PublisherID,
+    bookId
+  ]
+  const [row] = await query<ResultSetHeader>(
+    "UPDATE BOOK SET `BookName` = ?, `QuantityInStock` = ?, `Barcode` = ?, `Price` = ? , `Description` = ?, `PublishDate` = ?, `Size` = ?, `PublisherID` = ? WHERE `BookID` = ?",
+    values
+  )
+
+  // console.log(row)
+  return row.affectedRows > 0
+}
 
 export const deleteBook = async (bookId : string) => {
   const [row] = await query<ResultSetHeader>(
     `DELETE FROM BOOK
     WHERE BookID = ?`, [bookId])
-  console.log("Full row object:", row)
+  // console.log("Full row object:", row)
   return row.affectedRows > 0
 } 
