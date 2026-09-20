@@ -67,7 +67,7 @@ function Home() {
         }
       </div>
       <Footer/>
-      <Link className='btn bg-primary' to="/about">About</Link> 
+      <Link className='btn bg-primary' to="/ourteam">Our team</Link> 
     </>
   )
 }

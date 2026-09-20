@@ -7,7 +7,8 @@ import {
   Navigate,
 } from "react-router-dom";
 import Home from './pages/Home';
-import About from './pages/About';
+
+import OurTeam from './pages/OurTeam';
 
 function App() {
 
@@ -16,7 +17,7 @@ function App() {
       <Router>
         <Routes>
         <Route path='/' element={<Home/>}/>
-        <Route path='/about' element={<About/>}/>
+        <Route path='/ourteam' element={<OurTeam/>}/>
         <Route path='*' element={<Navigate to="/"/>}/>
         </Routes>
       </Router>
