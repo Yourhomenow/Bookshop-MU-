@@ -3,6 +3,7 @@ import express, {type Request, type Response } from 'express'
 
 export const getBooks = async (req: Request, res: Response)=>{
   try{
+
     const book = await clientService.getBooks();
     res.status(200).json(book)
   }catch(err){
