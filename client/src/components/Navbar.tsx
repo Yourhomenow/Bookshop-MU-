@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 function NavBar() {
 
   return (
-    <div className="navbar bg-base-100 shadow-sm gap-10 min-h-0 h-10 bg-secondary">
+    <div className="navbar shadow-sm gap-10 min-h-0 h-10 bg-secondary">
       <Link className='btn btn-ghost text-sm h-8 text-white' to="/">
         <img 
                 src="/book-in-hands.svg" 
@@ -19,7 +19,8 @@ function NavBar() {
           <div className="w-6 rounded-full">
             <img
               alt="Tailwind CSS Navbar component"
-              src="" />
+              src="#" 
+            />
           </div>
       </div>
     </div>

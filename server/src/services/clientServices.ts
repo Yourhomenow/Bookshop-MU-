@@ -21,6 +21,12 @@ export const getBooks = async (): Promise<BOOK[]> =>{
   return rows
 }
 
+export const getOneBook = async (bookId : string) => {
+  const values = [bookId]
+  const [rows] = await query(`SELECT * FROM BOOK WHERE BookID = ?`,values)
+  return rows
+}
+
 
 export const createBook = async (bookData : BOOK) => {
   const {BookName, QuantityInStock, Barcode, Price, Description, PublishDate, Size, PublisherID} =  bookData

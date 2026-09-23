@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import './App.css'
 import {
   BrowserRouter as Router,
@@ -9,6 +8,7 @@ import {
 import Home from './pages/Home';
 
 import OurTeam from './pages/OurTeam';
+import Book from './pages/Book';
 
 function App() {
 
@@ -18,6 +18,7 @@ function App() {
         <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/ourteam' element={<OurTeam/>}/>
+        <Route path='/book/:id' element={<Book/>}/>
         <Route path='*' element={<Navigate to="/"/>}/>
         </Routes>
       </Router>

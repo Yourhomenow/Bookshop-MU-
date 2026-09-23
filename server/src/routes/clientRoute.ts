@@ -4,6 +4,8 @@ import * as clientController from "../controllers/clientController"
 const router = express.Router()
 
 router.get(`/books`, clientController.getBooks)
+router.get(`/books/:id`, clientController.getOneBook)
+
 
 router.post(`/books`, clientController.createBook)
 
